@@ -4,10 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const toResumeBtn = document.getElementById('to-resume-btn');
   const toCardBtn = document.getElementById('to-card-btn');
 
+  // 모바일 브라우저 환경에 맞는 최상단 스크롤 초기화 함수
+  const resetScroll = () => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
   // 명함 → 이력서 (카드 뒤집기)
   if (toResumeBtn && card) {
     toResumeBtn.addEventListener('click', () => {
       card.classList.add('flipped');
+      // 이력서 내의 스크롤 위치를 맨 위로 초기화
+      const scrollable = card.querySelector('.scrollable');
+      if (scrollable) {
+        scrollable.scrollTop = 0;
+      }
+      resetScroll();
     });
   }
 
@@ -15,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (toCardBtn && card) {
     toCardBtn.addEventListener('click', () => {
       card.classList.remove('flipped');
+      resetScroll();
     });
   }
 
