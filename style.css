@@ -165,7 +165,19 @@ body {
 }
 
 /* ================= 명함 앞면 ================= */
-.card-front { z-index: 2; }
+.card-front {
+  z-index: 2;
+  pointer-events: auto;
+}
+.card-back {
+  pointer-events: none;
+}
+.card.flipped .card-front {
+  pointer-events: none;
+}
+.card.flipped .card-back {
+  pointer-events: auto;
+}
 
 .card-front .card-content {
   display: flex; flex-direction: column;
@@ -323,6 +335,8 @@ body {
   overflow-y: auto;
   padding-right: 6px;
   margin-bottom: 52px; /* 버튼 높이만큼 확보 */
+  -webkit-overflow-scrolling: touch; /* iOS 모바일 터치 스크롤 지원 */
+  transform: translate3d(0, 0, 0); /* 3D 플립 환경에서 터치 스크롤 차단 방지 */
 }
 
 /* 스크롤바 */
